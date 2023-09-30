@@ -3,6 +3,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import qrcode
 
+
 def generar_codigo_qr(texto, nombre_archivo):
     qr = qrcode.QRCode(
         version=1,
@@ -15,6 +16,7 @@ def generar_codigo_qr(texto, nombre_archivo):
 
     img = qr.make_image(fill_color="black", back_color="white")
     img.save(nombre_archivo)
+
 
 def mostrar_codigo_qr(texto):
     ventana = tk.Tk()
@@ -34,8 +36,10 @@ def mostrar_codigo_qr(texto):
 
     ventana.mainloop()
 
+
 if __name__ == "__main__":
-    texto = input("Ingrese el texto o enlace que desea convertir en código QR: ")
+    texto = input(
+        "Ingrese el texto o enlace que desea convertir en código QR: ")
     mostrar_codigo_qr(texto)
-    
+
     print(mostrar_codigo_qr(texto))
