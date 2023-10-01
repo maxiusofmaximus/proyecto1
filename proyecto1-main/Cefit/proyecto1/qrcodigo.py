@@ -4,7 +4,8 @@ from PIL import Image, ImageTk
 import qrcode
 
 
-def generar_codigo_qr(texto, nombre_archivo):
+def generar_codigo_qr():
+    texto = entrada_texto.get()
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -15,31 +16,32 @@ def generar_codigo_qr(texto, nombre_archivo):
     qr.make(fit=True)
 
     img = qr.make_image(fill_color="black", back_color="white")
-    img.save(nombre_archivo)
+    img.save("codigo_qr.png")
 
-
-def mostrar_codigo_qr(texto):
-    ventana = tk.Tk()
-    ventana.title("Código QR")
-
-    # Genera el código QR y lo guarda en un archivo
-    nombre_archivo = "codigo_qr.png"
-    generar_codigo_qr(texto, nombre_archivo)
-
-    # Carga la imagen PNG en un objeto PhotoImage de Tkinter
-    imagen = Image.open(nombre_archivo)
+    # Actualiza la imagen en el Label
+    imagen = Image.open("codigo_qr.png")
     foto = ImageTk.PhotoImage(imagen)
-
-    # Crea un Label para mostrar la imagen
-    label_imagen = tk.Label(ventana, image=foto)
-    label_imagen.pack()
-
-    ventana.mainloop()
+    label_imagen.config(image=foto)
+    label_imagen.image = foto
 
 
-if __name__ == "__main__":
-    texto = input(
-        "Ingrese el texto o enlace que desea convertir en código QR: ")
-    mostrar_codigo_qr(texto)
+# Crear la ventana principal
+ventana = tk.Tk()
+ventana.title("Generador de Código QR")
 
-    print(mostrar_codigo_qr(texto))
+# Etiqueta y entrada de texto
+etiqueta = tk.Label(ventana, text="Ingrese el texto o enlace:")
+etiqueta.pack()
+entrada_texto = tk.Entry(ventana)
+entrada_texto.pack()
+
+# Botón para generar el código QR
+boton_generar = tk.Button(
+    ventana, text="Generar Código QR", command=generar_codigo_qr)
+boton_generar.pack()
+
+# Área para mostrar el código QR
+label_imagen = tk.Label(ventana)
+label_imagen.pack()
+
+ventana.mainloop()
