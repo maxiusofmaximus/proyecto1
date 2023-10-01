@@ -1,0 +1,11 @@
+[Setup]
+AppName=Mi Aplicación QR
+AppVersion=0.8
+DefaultDirName={pf}\QRcodigo
+OutputDir=Output
+
+[Files]
+Source: "C:\Users\maxli\Downloads\proyecto1-main\proyecto1-main\Cefit\generar QRcode\dist\qrcodigo.exe"; DestDir: "{app}"
+
+[Icons]
+Name: "{commondesktop}\Qrcode.ico"; Filename: "{app}\qrcodigo.exe"
